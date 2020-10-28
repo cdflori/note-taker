@@ -1,4 +1,3 @@
-const path = require("path");
 const fs = require("fs");
 
 
@@ -27,5 +26,23 @@ module.exports = (app) => {
             
         });
         
+    });
+
+    // DELETE "/api/notes" rids of any note with an id equal req.params.id
+
+    app.delete("/notes/:id", function(req, res){
+        fs.readFile('./db/db.json', 'utf8', (err, data) => {
+            if(err) throw err;
+            const parsedData = JSON.parse(data);
+            parsedData = parsedData.filter(obj => obj.id !== req.params.id)
+
+            fs.writeFile(".db/db.json", JSON.stringify(parsedData), (err) => {
+                if (err) throw err;
+                res.json("")
+            });
+        });
+
+        
+
     });
 }
