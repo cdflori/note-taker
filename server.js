@@ -8,9 +8,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-// require("./routes/apiRoutes")(app);
+require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 app.listen(PORT, function(){
-    console.log("Ready to view on localhost:" + PORT);
+    console.log(`Ready to view on http://localhost:${PORT}`);
 }); 
